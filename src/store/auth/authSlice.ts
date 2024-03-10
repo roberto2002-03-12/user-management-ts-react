@@ -6,6 +6,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     authState: 'not-authenticated', // authenticated | checking | not-authenticated
+    profileState: 'finished',
     user: {},
     authMessage: '',
     options: [],
@@ -62,6 +63,16 @@ export const authSlice = createSlice({
     onErrorRecovery: (state, { payload }) => {
       state.authState = 'not-sent';
       state.authMessage = payload;
+    },
+    onSetNewProfile: (state, { payload }) => {
+      state.profileState = 'finished';
+      state.user = payload;
+    },
+    onLoadProfile: (state) => {
+      state.profileState = 'loading';
+    },
+    onSetLoadedProfile: (state) => {
+      state.profileState = 'finished';
     }
   }
 });
@@ -79,5 +90,8 @@ export const {
   onSubmitRecovery,
   onCheckingRecovery,
   onErrorRecovery,
-  onSetUser
+  onSetUser,
+  onLoadProfile,
+  onSetNewProfile,
+  onSetLoadedProfile
 } = authSlice.actions;

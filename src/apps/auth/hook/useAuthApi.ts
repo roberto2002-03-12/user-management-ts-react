@@ -4,13 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { 
   onLogin, onCheckingAuth, onSubmitRecovery, onResetRecovery,
-  onStartRecovery, onLogoutUser, onSetOptions, onSetUser
+  onStartRecovery, onLogoutUser, onSetOptions, onSetUser,
+  onLoadProfile, onSetNewProfile, onSetLoadedProfile
 } from '../../../store';
 import { 
   IUserLoginInputs, IUser, 
-  IRecoveryInputs, IRecoveryChangePasswordInputs
+  IRecoveryInputs, IRecoveryChangePasswordInputs, IUserProfileInputs, IUserChangePasswordInputs
 } from '../model'
 import { ISideBarOptions } from '../../../models'
+import { AxiosError } from 'axios';
 
 export const useAuthApi = () => {
   const dispatch = useDispatch();
@@ -138,11 +140,120 @@ export const useAuthApi = () => {
     dispatch(onSetUser(JSON.parse(user)));
   };
 
+  const updateProfile = async (data: IUserProfileInputs) => {
+    dispatch(onLoadProfile())
+    try {
+      await userManagementApi.put('/profile', data);
+      const user: IUser = JSON.parse(localStorage.getItem('user')!);
+      const newUser: IUser = {
+        ...user,
+        profile: {
+          id: user.profile?.id ?? 1000000000,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          birth: `${data.birth?.toString()}`,
+          phoneNumber: data.phoneNumber,
+          userId: user.id
+        }
+      }
+
+      localStorage.setItem('user', JSON.stringify(newUser));
+      dispatch(onSetNewProfile(newUser));
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.code === 'ERR_NETWORK') {
+          Swal.fire({
+            icon: 'warning',
+            title: `Failed connection`,
+            text: `There isn't connection to the server, try reloading the page.`
+          });
+        } else if (error.message.includes('400')) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error on getting Users Data',
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            text: `${(error as any).response?.data?.message ?? '---'}`,
+          });
+        } else if (error.message.includes('401')) {
+          Swal.fire({
+            icon: 'error',
+            title: `Invalid token`,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            text: `Login again`,
+          });
+          logout();
+        } else if (error.message.includes('403')) {
+          console.log(`error.response?.status === 403`)
+          Swal.fire({
+            icon: 'error',
+            title: `It looks you don't have the privileges for such action`,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            text: `${(error as any).response?.data?.message ?? '---'}`,
+          });
+          navigate('/user-management/home');
+        }
+      }
+      console.log(error);
+    }
+  };
+
+  const changePassword = async (data: IUserChangePasswordInputs) => {
+    dispatch(onLoadProfile());
+    try {
+      delete data.repeatPassowrd;
+      await userManagementApi.patch('/auth/user/change-password', data);
+      dispatch(onSetLoadedProfile());
+      Swal.fire({
+        icon: 'success',
+        title: 'Password changed'
+      })
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.code === 'ERR_NETWORK') {
+          Swal.fire({
+            icon: 'warning',
+            title: `Failed connection`,
+            text: `There isn't connection to the server, try reloading the page.`
+          });
+        } else if (error.message.includes('400')) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error on getting Users Data',
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            text: `${(error as any).response?.data?.message ?? '---'}`,
+          });
+        } else if (error.message.includes('401')) {
+          Swal.fire({
+            icon: 'error',
+            title: `Invalid token`,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            text: `Login again`,
+          });
+          logout();
+        } else if (error.message.includes('403')) {
+          console.log(`error.response?.status === 403`)
+          Swal.fire({
+            icon: 'error',
+            title: `It looks you don't have the privileges for such action`,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            text: `${(error as any).response?.data?.message ?? '---'}`,
+          });
+          navigate('/user-management/home');
+        }
+      }
+      navigate('/user-management/home');
+      dispatch(onSetLoadedProfile());
+      console.log(error);
+    }
+  }
+
   return {
     login,
     sendRecovery,
     changePasswordRecovery,
     logout,
-    setUserAndOptions
+    setUserAndOptions,
+    updateProfile,
+    changePassword
   }
 }

@@ -5,7 +5,6 @@ export * from './user/EditUser';
 export * from './role/RolesManagement';
 export * from './Logs';
 export * from './cat/CatManagement';
-export * from './user/UserProfile';
 export * from './role/RoleCreate';
 export * from './role/RoleEdit';
 export * from './role/RolePage';

@@ -7,5 +7,6 @@ export interface AuthSlice {
   authState: TypeAuthState,
   user: IUser;
   authMessage: string;
-  options: ISideBarOptions[]
+  options: ISideBarOptions[];
+  profileState: 'finished' | 'loading';
 }

@@ -36,8 +36,8 @@ export const NavBar = () => {
               <ConstructionIcon />
             </button>
             <ul className="dropdown-menu">
-              <li><Link className="dropdown-item" to="#">Edit profile</Link></li>
-              <li><p className="dropdown-item" onClick={() => logout()}>Logout</p></li>
+              <li><Link className="dropdown-item" to="/user-management/profile">Profile</Link></li>
+              <li><button className="dropdown-item" style={{ border: '0' }} onClick={() => logout()}>Logout</button></li>
             </ul>
           </div>
         </Toolbar>

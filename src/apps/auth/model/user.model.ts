@@ -1,10 +1,11 @@
+import { Dayjs } from 'dayjs';
 import { IRole } from '../../user_management/models/privileges.model';
 
 export interface IProfile {
   id: number;
   firstName: string;
   lastName: string;
-  birth: Date;
+  birth: Date | Dayjs | string;
   phoneNumber: string;
   userId: number;
 }
@@ -38,4 +39,16 @@ export interface IRecoveryChangePasswordInputs {
   recoveryToken: string;
   newPassword: string;
   repeatPassword?: string;
+}
+
+export interface IUserProfileInputs {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  birth: string | Date | Dayjs | null;
+}
+
+export interface IUserChangePasswordInputs {
+  newPassword: string;
+  repeatPassowrd?: string;
 }

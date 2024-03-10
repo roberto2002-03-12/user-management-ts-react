@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useAuthApi } from '../apps/auth/hook/useAuthApi'
-import { Auth } from '../apps/auth/pages/Auth';
+import { Auth, UserProfile } from '../apps/auth/pages';
 import { 
   Home, UsersManagament, RolesManagement, CatManagement,
-  Logs, UserProfile, RoleCreate, RoleEdit, RolePage,
+  Logs, RoleCreate, RoleEdit, RolePage,
   CreateUser, EditUser
 } from '../apps/user_management/pages';
 import { Error } from '../shared';
@@ -46,7 +46,7 @@ export const AppRouter = () => {
             <Route path='/user-management/roles/edit/:id' element={ <RoleEdit /> }/>
             <Route path='/user-management/logs' element={ <Logs /> }/>
             <Route path='/user-management/cat' element={ <CatManagement /> }/>
-            <Route path='/user-management/profile/:id' element={ <UserProfile /> }/>
+            <Route path='/user-management/profile' element={ <UserProfile /> }/>
           </>
         ) : (
           <Route path='/login' element={ <Auth /> } />
