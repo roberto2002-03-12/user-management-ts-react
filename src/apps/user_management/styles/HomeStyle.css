@@ -1,0 +1,30 @@
+.um-home {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.um-home-explain {
+  width: 500px;
+  min-width: 320px;
+}
+
+.um-home-explain h2 {
+  color: #3F53FE;
+  font-size: 28px;
+}
+
+.um-home-explain p {
+  font-size: 14px;
+}
+
+.um-home-explain li {
+  font-size: 14px;
+}
+
+.um-home-explain li::marker {
+  color: #2c40f5;
+}

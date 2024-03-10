@@ -1,0 +1,27 @@
+.role-create {
+  padding-top: 80px;
+}
+
+.role-create-options {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.role-create-inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.horrible-form-wich-destroy-everything {
+  display: inline-block;
+  width: 100%;
+}
+
+.role-description-input {
+  width: 90%;
+}

@@ -1,0 +1,22 @@
+.auth-box-title-recovery {
+  width: 250px; 
+}
+
+.auth-box-title-recovery h2 {
+  text-align: center;
+  color: #3F53FE;
+  font-size: 28px;
+}
+
+.auth-box-title-recovery p {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+}

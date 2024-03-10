@@ -1,0 +1,52 @@
+.create-user-container {
+  margin-top: 100px;
+}
+
+.create-user-options {
+  display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+  height: 100px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-user-inputs {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.horrible-form-which-destroy-everything {
+  display: inline-block;
+  width: 100%
+}
+
+.create-user-roles-aside-list {
+  max-height: 400px;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.user-data-box {
+  width: 280px;
+  margin: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.189);
+  border-radius: 20px;
+  max-height: 120px;
+}
+
+.user-data-box h5 {
+  font-size: 18px;
+  color: gray;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 1px;
+}
+
+.user-data-box p {
+  color: rgb(59, 59, 59);
+  margin-left: 22px;
+}

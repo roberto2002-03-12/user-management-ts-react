@@ -1,0 +1,22 @@
+.one-role-container {
+  margin-top: 100px;
+}
+
+.one-role-data-box {
+  width: 100%;
+  border-bottom: 3px solid #1b246d;
+  border-right: 6px solid #3F53FE;
+}
+
+.one-role-aside {
+  height: 350px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.one-role-data-box-credentials {
+  max-height: 350px;
+  overflow-y: auto;
+}

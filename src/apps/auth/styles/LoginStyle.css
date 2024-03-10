@@ -1,0 +1,39 @@
+.auth-box-title {
+  text-align: center;
+}
+
+.auth-title {
+  color: #3F53FE;
+  font-size: 28px;
+  margin: 0;
+}
+
+.auth-span {
+  font-size: 10px;
+  color: rgb(95, 95, 95);
+  margin-top: -20px;
+}
+
+.auth-link-github {
+  font-size: 10px;
+  color: rgb(95, 95, 95);
+  margin-top: -20px;
+}
+
+.auth-inputs {
+
+  text-align: center;
+}
+
+.auth-link {
+  text-align: left;
+  margin-top: 2px;
+  width: 150px;
+  margin-left: 62px;
+  margin-right: 50%;
+  margin-bottom: 20px;
+}
+
+.auth-recovery-link {
+  font-size: 12px;
+}
