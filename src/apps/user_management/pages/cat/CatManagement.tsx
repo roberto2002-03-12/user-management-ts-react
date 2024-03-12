@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import { useCatApi } from '../../hooks/useCatApi';
 import { 
   useInfiniteQuery, 
@@ -8,7 +7,7 @@ import {
 } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { NavBar } from '../../components';
-import { CatList } from '../../components';
+import { CatList, CatModal } from '../../components';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import WifiTetheringErrorIcon from '@mui/icons-material/WifiTetheringError';
@@ -88,17 +87,7 @@ export const CatManagement = () => {
       <div className="container cat-container">
         <div className="cat-title-filters">
           <h5>Cat filters</h5>
-          <Button
-            variant='outlined'
-            size='small'
-          >
-            <Link
-              to={'/user-management/cat/create'}
-              style={{ textDecoration: 'none' }}
-            >
-              Create cat
-            </Link>
-          </Button>
+          <CatModal />
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)}>

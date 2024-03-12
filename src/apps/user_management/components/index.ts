@@ -6,3 +6,4 @@ export * from './roles/RolesTable';
 export * from './TextFielInputProps';
 export * from './cat/CatList';
 export * from './cat/CatCard';
+export * from './cat/CatModal';

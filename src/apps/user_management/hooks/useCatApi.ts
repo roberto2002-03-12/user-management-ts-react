@@ -1,6 +1,5 @@
 import userManagementApi from '../../../api/user-management.api';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useErrorHandler } from '../../../hooks'
 import Swal from 'sweetalert2';
 import {
@@ -12,7 +11,6 @@ import { AxiosError } from 'axios';
 
 export const useCatApi = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const errorManage = useErrorHandler();
 
   const getCats = async (dataInputs: ICatFiltersInputs) => {
@@ -48,7 +46,6 @@ export const useCatApi = () => {
         icon: 'success',
         title: 'New cat added'
       });
-      navigate('/user-management/cat');
     } catch (error) {
       if (error instanceof AxiosError) {
         errorManage(error, {
