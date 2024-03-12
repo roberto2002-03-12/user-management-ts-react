@@ -1,0 +1,47 @@
+.cat-container {
+  margin-top: 100px;
+}
+
+.cat-title-filters {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cat-title-filters h5 {
+  font-size: 24px;
+  color: gray;
+}
+
+.cat-filters {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cat-buttons {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* CAT LIST */
+
+.cat-list {
+  margin-top: 100px;
+}
+
+.cat-card {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}

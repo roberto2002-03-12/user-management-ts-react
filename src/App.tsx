@@ -2,6 +2,9 @@ import { BrowserRouter } from 'react-router-dom'
 import { AppRouter } from './routes/AppRouter'
 import { Provider } from 'react-redux'
 import { store } from './store'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+
+const queryClient = new QueryClient();
 
 function App() {
 
@@ -9,7 +12,9 @@ function App() {
     <>
       <Provider store={ store }>
         <BrowserRouter>
-          <AppRouter />
+          <QueryClientProvider client={queryClient}>
+            <AppRouter />
+          </QueryClientProvider>
         </BrowserRouter>
       </Provider>
     </>
