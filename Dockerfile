@@ -7,6 +7,8 @@ COPY . .
 #then delete these files
 RUN rm -rf .env node_modules dist
 
+ENV VITE_USERMANAGEMENT_API=$VITE_USERMANAGEMENT_API
+
 RUN npm install
 
 RUN npm run build
