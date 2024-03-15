@@ -9,7 +9,7 @@ RUN rm -rf .env node_modules dist
 
 RUN npm install
 
-RUN npm build
+RUN npm run build
 
 EXPOSE 4173
 
