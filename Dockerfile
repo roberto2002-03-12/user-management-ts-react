@@ -2,6 +2,8 @@ FROM node:18-alpine
 
 WORKDIR /app
 
+ARG VITE_USERMANAGEMENT_API
+
 #copy everything
 COPY . .
 #then delete these files
