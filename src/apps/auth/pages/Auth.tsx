@@ -17,6 +17,23 @@ export const Auth = () => {
             <Login />
           ) : authState === 'recovery' ? (
             <Recovery />
+          ) : authState === 'authenticated' ? (
+            <div
+              style={{
+                height: '300px',
+                width: '300px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <h2
+                style={{
+                  fontSize: '24px',
+                  color: 'gray'
+                }}
+              >Alredy logged</h2>
+            </div>
           ) : (
             <ChangePassword />
           )

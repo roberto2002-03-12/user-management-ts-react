@@ -99,7 +99,7 @@ export const SideBar = () => {
           }}
         >
           <div style={{ height: '85px' }}>
-            <p>{typeof user.profile === 'undefined' ? `${user.email}` : `${user.profile.firstName} ${user.profile.lastName}`}</p>
+            <p>{ user.profile && user.profile.firstName && user.profile.lastName ? `${user.profile.firstName} ${user.profile.lastName}` : `${user.email}`}</p>
           </div>
           <div>
             <p>{typeof user.role === 'undefined' || user.role.length === 0 ? '---' : `${user.role[0].roleName}`}</p>

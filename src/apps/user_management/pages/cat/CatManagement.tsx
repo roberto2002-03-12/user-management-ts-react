@@ -192,12 +192,30 @@ export const CatManagement = () => {
             </div>
           ) : (
             <>
-              <CatList cats={data!.pages.flatMap(value => value!.data)} innerRef={ref} />
               {
-                isFetchingNextPage && (
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '300px' }}>
-                    <CircularProgress color="inherit" />
+                typeof data.pages === 'undefined' || data.pages.length === 0 ? (
+                  <div
+                    style={{
+                      width: '100%',
+                      height: '300px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
+                  >
+                    <p style={{ fontSize: '24px', fontWeight: 'bold', color: 'gray' }}>There aren't any cat yet</p>
                   </div>
+                ) : (
+                  <>
+                  <CatList cats={data!.pages.flatMap(value => value!.data)} innerRef={ref} />
+                  {
+                    isFetchingNextPage && (
+                      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '300px' }}>
+                        <CircularProgress color="inherit" />
+                      </div>
+                    )
+                  }
+                  </>
                 )
               }
             </>

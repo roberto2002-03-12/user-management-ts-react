@@ -32,10 +32,10 @@ export const UserProfile = () => {
     control: controlProfile
   } = useForm<IUserProfileInputs>({
     defaultValues: {
-      firstName: user.profile ? user.profile.firstName ?? 'not registed' : 'not registed',
-      lastName: user.profile ? user.profile.lastName ?? 'not registed' : 'not registed',
-      phoneNumber: user.profile ? user.profile.phoneNumber ?? 'not registed' : 'not registed',
-      birth: user.profile ?  dayjs(user.profile.birth ?? '') : null
+      firstName: user.profile && user.profile.firstName ? user.profile.firstName : 'not registed',
+      lastName: user.profile && user.profile.lastName ? user.profile.lastName : 'not registed',
+      phoneNumber: user.profile && user.profile.phoneNumber ? user.profile.phoneNumber : 'not registed',
+      birth: user.profile && user.profile.birth ?  dayjs(user.profile.birth ?? '') : null
     }
   });
 
@@ -84,7 +84,7 @@ export const UserProfile = () => {
           <div className='user-profile-img'>
             <img src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png" alt="user profile"/>
           </div>
-          <p className='user-profile-img-p'>{ typeof user.profile !== 'undefined' ? `${user.profile.firstName} ${user.profile.lastName}` : 'not registed' }</p>
+          <p className='user-profile-img-p'>{ user.profile && user.profile.firstName && user.profile.lastName ? `${user.profile.firstName} ${user.profile.lastName}` : 'not registed' }</p>
           <div className='user-profile-side-buttons'>
             <Button variant='outlined' size='small' sx={{ marginBottom: '10px', width: '170px' }} onClick={ () => handleChangeContent('info') }>Info</Button>
             <Button variant='outlined' size='small' sx={{ marginBottom: '10px', width: '170px' }} onClick={ () => handleChangeContent('edit-profile') }>Edit profile</Button>
@@ -99,12 +99,12 @@ export const UserProfile = () => {
                 <h5>User info</h5>
                 <div className='col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12'>
                   <p className='user-profile-content-label'>First Name</p>
-                  <p className='user-profile-content-p'>{typeof user.profile !== 'undefined' ? user.profile.firstName : 'not registed'}</p>
+                  <p className='user-profile-content-p'>{ user.profile && user.profile.firstName ? user.profile.firstName : 'not registed'}</p>
                 </div>
 
                 <div className='col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12'>
                   <p className='user-profile-content-label'>Last Name</p>
-                  <p className='user-profile-content-p'>{typeof user.profile !== 'undefined' ? user.profile.lastName : 'not registed'}</p>
+                  <p className='user-profile-content-p'>{ user.profile && user.profile.lastName  ? user.profile.lastName : 'not registed'}</p>
                 </div>
 
                 <div className='col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12'>
@@ -113,13 +113,18 @@ export const UserProfile = () => {
                 </div>
 
                 <div className='col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12'>
+                  <p className='user-profile-content-label'>Phone number</p>
+                  <p className='user-profile-content-p'>{ user.profile && user.profile.phoneNumber ? user.profile.phoneNumber : 'not registed'}</p>
+                </div>
+
+                <div className='col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12'>
                   <p className='user-profile-content-label'>Main Role</p>
-                  <p className='user-profile-content-p'>{typeof user.role !== 'undefined' && user.role.length > 0 ? user.role[0].roleName : 'not assigned'}</p>
+                  <p className='user-profile-content-p'>{ user.role && user.role.length > 0 ? user.role[0].roleName : 'not assigned'}</p>
                 </div>
 
                 <div className='col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12'>
                   <p className='user-profile-content-label'>Birth Date</p>
-                  <p className='user-profile-content-p'>{typeof user.profile !== 'undefined' ? `${user.profile.birth}` : 'not registed'}</p>
+                  <p className='user-profile-content-p'>{ user.profile && user.profile.birth ? `${user.profile.birth}` : 'not registed'}</p>
                 </div>
 
                 <div className='col-xl-6 col-md-6 col-lg-6 col-sm-12 col-12'>

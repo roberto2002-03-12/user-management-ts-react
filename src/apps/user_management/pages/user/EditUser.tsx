@@ -44,11 +44,13 @@ export const EditUser = () => {
   }
   const rolesFiltered = useMemo(() => {
     return rolesForSelect.filter(role => role.roleName.toLowerCase().includes(filter.toLowerCase()))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filter]);
 
   useEffect(() => {
     getOneUser(parseInt(id!));
     getRolesForSelect();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEffect(() => {
@@ -99,23 +101,23 @@ export const EditUser = () => {
                   </div>
                   <div className='user-data-box'>
                     <h5>First Name</h5>
-                    <p>{ typeof user.profile === 'undefined' ? 'not registed' : user.profile.firstName }</p>
+                    <p>{ user.profile && user.profile.firstName ? user.profile.firstName : 'not registed' }</p>
                   </div>
                   <div className='user-data-box'>
                     <h5>Last Name</h5>
-                    <p>{ typeof user.profile === 'undefined' ? 'not registed' : user.profile.lastName }</p>
+                    <p>{ user.profile && user.profile.lastName ? user.profile.lastName : 'not registed' }</p>
                   </div>
                   <div className='user-data-box'>
                     <h5>Main role</h5>
-                    <p>{ typeof user.role === 'undefined' ? 'not assigned' : user.role.length === 0 ? 'not assigned' : user.role[0].roleName }</p>
+                    <p>{ user.role === undefined ? 'not assigned' : user.role.length === 0 ? 'not assigned' : user.role[0].roleName }</p>
                   </div>
                   <div className='user-data-box'>
                     <h5>Birth</h5>
-                    <p>{ typeof user.profile === 'undefined' ? 'not registed' : `${user.profile.birth}` }</p>
+                    <p>{ user.profile && user.profile.lastName ? `${user.profile.birth}` : 'not registed' }</p>
                   </div>
                   <div className='user-data-box'>
                     <h5>Phone Number</h5>
-                    <p>{ typeof user.profile === 'undefined' ? 'not registed' : user.profile.phoneNumber }</p>
+                    <p>{ user.profile && user.profile.phoneNumber ? user.profile.phoneNumber : 'not registed' }</p>
                   </div>
                   <div className='user-data-box'>
                     <h5>Registed at</h5>

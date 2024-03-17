@@ -172,8 +172,9 @@ export const useAuthApi = () => {
             icon: 'error',
             title: 'Error on getting Users Data',
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            text: `${(error as any).response?.data?.message ?? '---'}`,
+            text: `${(error as any).response?.data?.message ?? '---'}`
           });
+          setTimeout(() => dispatch(onSetLoadedProfile()), 5000);
         } else if (error.message.includes('401')) {
           Swal.fire({
             icon: 'error',
