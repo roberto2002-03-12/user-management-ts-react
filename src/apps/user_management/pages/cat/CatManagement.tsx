@@ -60,9 +60,9 @@ export const CatManagement = () => {
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = typeof lastPage !== 'undefined' && lastPage.data.length > 0 ? allPages.length + 1 : undefined;
-      console.log('next page: ', nextPage)
       return nextPage;
     },
+    refetchOnWindowFocus: false // with this useInfiniteQuery won't send a request again when the page is minimized.
   });
 
   const { ref, inView } = useInView();

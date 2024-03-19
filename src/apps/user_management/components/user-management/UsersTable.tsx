@@ -59,7 +59,7 @@ export const UsersTable = (
                 {
                   users.map(row => (
                     <tr key={ row.id }>
-                      <td> <p>{typeof row.profile === 'undefined' ? 'not registed' : truncateString(`${row.profile.firstName} ${row.profile.lastName}`, 28)}</p> </td>
+                      <td> <p>{row.profile && row.profile.firstName && row.profile.lastName ? truncateString(`${row.profile.firstName} ${row.profile.lastName}`, 28) : 'not registed' }</p> </td>
                       <td> <p>{truncateString(row.email, 25)}</p> </td>
                       <td> <p>{typeof row.role === 'undefined' ? 'not asigned' : row.role.length > 0 ? `${row.role[0].roleName}` : 'not asigned'}</p> </td>
                       <td> <p>{`${row.created_at}`}</p> </td>

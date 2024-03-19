@@ -21,6 +21,15 @@ import { IRoleForSelect, IUserInputs } from '../../models';
 import { IStoreRedux } from '../../../../store'
 import { SmallLoading } from '../../../../shared';
 
+const defaultValues: IUserInputs = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  birth: null,
+  phoneNumber: ''
+}
+
 export const CreateUser = () => {
   const { getRolesForSelect, createUser } = useUserManagementApi();
   const { rolesForSelect, loadingRolesState } = useSelector((state: IStoreRedux) => state.userManagement);
@@ -34,7 +43,7 @@ export const CreateUser = () => {
     formState: { errors, isSubmitted },
     reset, 
     control
-  } = useForm<IUserInputs>();
+  } = useForm<IUserInputs>({defaultValues});
 
   const onSubmit: SubmitHandler<IUserInputs> = (data) => {
     if (Object.keys(errors).length > 0) return;

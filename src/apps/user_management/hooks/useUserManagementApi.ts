@@ -36,8 +36,8 @@ export const useUserManagementApi = () => {
       + (dataInputs !== undefined && dataInputs.page !== undefined ? `${dataInputs.page}` : '1')
       + (dataInputs !== undefined && dataInputs.active !== undefined && dataInputs.active !== '' ? `&active=${dataInputs.active}` : '')
       + (dataInputs !== undefined && dataInputs.roleName !== undefined && dataInputs.roleName !== '' ? `&roleName=${dataInputs.roleName}` : '')
-      + (dataInputs !== undefined && dataInputs.createdAtStart !== undefined && dataInputs.createdAtStart !== '' ? `&createdAtStart=${dataInputs.createdAtStart}` : '')
-      + (dataInputs !== undefined && dataInputs.createdAtEnd !== undefined && dataInputs.createdAtEnd !== '' ? `&createdAtEnd=${dataInputs.createdAtEnd}` : '')
+      + (dataInputs !== undefined && dataInputs.createdAtStart !== undefined && dataInputs.createdAtStart !== '' && dataInputs.createdAtStart !== null ? `&createdAtStart=${dataInputs.createdAtStart}` : '')
+      + (dataInputs !== undefined && dataInputs.createdAtEnd !== undefined && dataInputs.createdAtEnd !== '' && dataInputs.createdAtEnd !== null ? `&createdAtEnd=${dataInputs.createdAtEnd}` : '')
       + (dataInputs !== undefined && dataInputs.order !== undefined ? `&order=${dataInputs.order}` : '');
 
       const { data } = await userManagementApi.get(url);
@@ -59,7 +59,6 @@ export const useUserManagementApi = () => {
           });
           getRoles();
         } else if (error.message.includes('401')) {
-          console.log(`Paso por: error.message.includes('401')`)
           Swal.fire({
             icon: 'error',
             title: `Invalid token`,
@@ -68,7 +67,6 @@ export const useUserManagementApi = () => {
           });
           logout();
         } else if (error.message.includes('403')) {
-          console.log(`error.response?.status === 403`)
           Swal.fire({
             icon: 'error',
             title: `It looks you don't have the privileges for such action`,
@@ -77,6 +75,13 @@ export const useUserManagementApi = () => {
           });
           navigate('/user-management/home');
         }
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -95,6 +100,13 @@ export const useUserManagementApi = () => {
             navigateError404: '/user-management/users'
           }
         )
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -116,6 +128,13 @@ export const useUserManagementApi = () => {
             navigateError404: '/user-management/roles'
           }
         )
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -132,6 +151,13 @@ export const useUserManagementApi = () => {
           navigateError403: '/user-management/home',
           navigateError404: '/user-management/home'
         })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -156,6 +182,13 @@ export const useUserManagementApi = () => {
           navigateError403: '/user-management/home',
           navigateError404: '/user-management/home'
         })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -182,6 +215,13 @@ export const useUserManagementApi = () => {
           navigateError403: '/user-management/home',
           navigateError404: '/user-management/roles'
         })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -202,6 +242,13 @@ export const useUserManagementApi = () => {
           navigateError403: '/user-management/home',
           navigateError404: '/user-management/roles'
         })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -218,8 +265,8 @@ export const useUserManagementApi = () => {
       + (dataInputs !== undefined && dataInputs.fullName !== undefined && dataInputs.fullName !== '' ? `&fullName=${dataInputs.fullName}` : '')
       + (dataInputs !== undefined && dataInputs.email !== undefined && dataInputs.email !== '' ? `&email=${dataInputs.email}` : '')
       + (dataInputs !== undefined && dataInputs.roleName !== undefined && dataInputs.roleName !== '' ? `&roleName=${dataInputs.roleName}` : '')
-      + (dataInputs !== undefined && dataInputs.createdAtStart !== undefined && dataInputs.createdAtStart !== '' ? `&createdAtStart=${dataInputs.createdAtStart}` : '')
-      + (dataInputs !== undefined && dataInputs.createdAtEnd !== undefined && dataInputs.createdAtEnd !== '' ? `&createdAtEnd=${dataInputs.createdAtEnd}` : '')
+      + (dataInputs !== undefined && dataInputs.createdAtStart !== undefined && dataInputs.createdAtStart !== '' && dataInputs.createdAtStart !== null && dataInputs.createdAtStart ? `&createdAtStart=${dataInputs.createdAtStart}` : '')
+      + (dataInputs !== undefined && dataInputs.createdAtEnd !== undefined && dataInputs.createdAtEnd !== '' && dataInputs.createdAtEnd !== null && dataInputs.createdAtEnd ? `&createdAtEnd=${dataInputs.createdAtEnd}` : '')
       + (dataInputs !== undefined && dataInputs.order !== undefined ? `&order=${dataInputs.order}` : '');
 
       const { data } = await userManagementApi(url);
@@ -241,7 +288,6 @@ export const useUserManagementApi = () => {
           });
           getUsers();
         } else if (error.message.includes('401')) {
-          console.log(`Paso por: error.message.includes('401')`)
           Swal.fire({
             icon: 'error',
             title: `Invalid token`,
@@ -250,7 +296,6 @@ export const useUserManagementApi = () => {
           });
           logout();
         } else if (error.message.includes('403')) {
-          console.log(`error.response?.status === 403`)
           Swal.fire({
             icon: 'error',
             title: `It looks you don't have the privileges for such action`,
@@ -259,6 +304,13 @@ export const useUserManagementApi = () => {
           });
           navigate('/user-management/home');
         }
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -279,6 +331,13 @@ export const useUserManagementApi = () => {
           navigateError403: '/user-management/home',
           navigateError404: '/user-management/users'
         })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -307,6 +366,13 @@ export const useUserManagementApi = () => {
           navigateError403: '/user-management/home',
           navigateError404: '/user-management/users'
         })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -327,6 +393,13 @@ export const useUserManagementApi = () => {
           navigateError403: '/user-management/home',
           navigateError404: '/user-management/users'
         })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }
@@ -343,6 +416,13 @@ export const useUserManagementApi = () => {
           navigateError403: '/user-management/home',
           navigateError404: '/user-management/users'
         })
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: 'An error has ocurred'
+        })
+        navigate('/user-management/home');
       }
       console.log(error);
     }

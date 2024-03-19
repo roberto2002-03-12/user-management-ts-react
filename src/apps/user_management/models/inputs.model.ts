@@ -15,8 +15,8 @@ export interface IUserInputs {
   lastName: string;
   email: string;
   password: string;
-  birth: Date;
-  phoneNumber: number;
+  birth: Date | null;
+  phoneNumber: number | string;
 }
 
 export interface IRoleInputs {
@@ -37,8 +37,8 @@ export interface IUserQuery {
   fullName?: string;
   roleName?: string;
   active?: string;
-  createdAtStart?: string;
-  createdAtEnd?: string;
+  createdAtStart?: string | null;
+  createdAtEnd?: string | null;
   limit?: number;
   page: number;
 }
@@ -48,8 +48,8 @@ export interface IRoleQuery {
   roleName?: string;
   active?: string;
   routeId?: number; 
-  createdAtStart?: string;
-  createdAtEnd?: string;
+  createdAtStart?: string | null;
+  createdAtEnd?: string | null;
   limit?: number;
   page: number;
 }

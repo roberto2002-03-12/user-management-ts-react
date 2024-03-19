@@ -100,7 +100,19 @@ export const useAuthApi = () => {
       dispatch(onSubmitRecovery());
       Swal.fire(data.message);
     } catch (error: unknown) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error on request',
+          text: error.response?.data.message ?? 'Failed on making a request'
+        })
+      }
+      Swal.fire({
+        icon: 'error',
+        title: 'Error on request',
+        text: 'An error has ocurred'
+      })
+      navigate(0);
     }
   };
 
@@ -184,7 +196,6 @@ export const useAuthApi = () => {
           });
           logout();
         } else if (error.message.includes('403')) {
-          console.log(`error.response?.status === 403`)
           Swal.fire({
             icon: 'error',
             title: `It looks you don't have the privileges for such action`,
@@ -194,7 +205,12 @@ export const useAuthApi = () => {
           navigate('/user-management/home');
         }
       }
-      console.log(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error on request',
+        text: 'An error has ocurred'
+      })
+      navigate('/user-management/home');
     }
   };
 
@@ -232,7 +248,6 @@ export const useAuthApi = () => {
           });
           logout();
         } else if (error.message.includes('403')) {
-          console.log(`error.response?.status === 403`)
           Swal.fire({
             icon: 'error',
             title: `It looks you don't have the privileges for such action`,
@@ -242,9 +257,13 @@ export const useAuthApi = () => {
           navigate('/user-management/home');
         }
       }
+      Swal.fire({
+        icon: 'error',
+        title: 'Error on request',
+        text: 'An error has ocurred'
+      })
       navigate('/user-management/home');
       dispatch(onSetLoadedProfile());
-      console.log(error);
     }
   }
 

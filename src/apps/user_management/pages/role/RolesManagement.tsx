@@ -18,6 +18,14 @@ import '../../styles/RolesManagementStyle.css';
 import { IRoleQuery } from '../../models';
 import { IStoreRedux } from '../../../../store';
 
+const defaultValues: IRoleQuery = {
+  active: '',
+  createdAtStart: null,
+  createdAtEnd: null,
+  page: 0,
+  roleName: ''
+};
+
 export const RolesManagement = () => {
   const { roles, loadingState } = useSelector((state: IStoreRedux) => state.userManagement);
   const { getRoles } = useUserManagementApi();
@@ -38,7 +46,7 @@ export const RolesManagement = () => {
     formState: { errors },
     reset,
     control
-  } = useForm<IRoleQuery>();
+  } = useForm<IRoleQuery>({defaultValues});
 
   const onSubmit: SubmitHandler<IRoleQuery> = (data) => {
     if (Object.keys(errors).length > 0) {
@@ -48,7 +56,7 @@ export const RolesManagement = () => {
     const paramsObj: Record<string, string | string[]> = {};
 
     (Object.keys(data) as (keyof typeof data)[]).forEach(key => {
-      if (typeof data[key] !== 'undefined' && data[key] !== '') {
+      if (typeof data[key] !== 'undefined' && data[key] !== '' && data[key] !== null && data[key]) {
         paramsObj[key] = String(data[key]);
       }
     });
@@ -62,7 +70,6 @@ export const RolesManagement = () => {
     const paramsObject: unknown = Object.fromEntries(params);
     (paramsObject as IRoleQuery).page = params.get('page') === null ? 1 : parseInt(params.get('page')!);
     getRoles(paramsObject as IRoleQuery);
-    console.log('hola desde roles')
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 

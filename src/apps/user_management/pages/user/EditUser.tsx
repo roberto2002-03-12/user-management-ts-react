@@ -62,7 +62,7 @@ export const EditUser = () => {
   const onSubmitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const rolesToSend = rolesSelected;
-    console.log(rolesToSend);
+
     assignNewRolesToUser(rolesToSend, user.id);
   }
 

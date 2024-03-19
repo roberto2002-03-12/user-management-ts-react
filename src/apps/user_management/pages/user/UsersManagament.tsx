@@ -18,6 +18,16 @@ import '../../styles/UsersManagementStyle.css';
 import { IStoreRedux } from '../../../../store';
 import { IUserQuery } from '../../models/inputs.model';
 
+const defaultValues: IUserQuery = {
+  active: '',
+  createdAtStart: null,
+  createdAtEnd: null,
+  page: 0,
+  email: '',
+  fullName: '',
+  roleName: ''
+};
+
 // um: user management
 export const UsersManagament = () => {
   const navigate = useNavigate();
@@ -32,7 +42,7 @@ export const UsersManagament = () => {
     control,
     formState: { errors, isSubmitted },
     reset
-  } = useForm<IUserQuery>();
+  } = useForm<IUserQuery>({defaultValues});
 
   const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -46,7 +56,7 @@ export const UsersManagament = () => {
     const paramsObj: Record<string, string | string[]> = {};
 
     (Object.keys(data) as (keyof typeof data)[]).forEach(key => {
-      if (typeof data[key] !== 'undefined' && data[key] !== '') {
+      if (typeof data[key] !== 'undefined' && data[key] !== '' && data[key] !== null && data[key]) {
         paramsObj[key] = String(data[key]);
       }
     });
@@ -58,7 +68,6 @@ export const UsersManagament = () => {
     const paramsObject: unknown = Object.fromEntries(params);
     (paramsObject as IUserQuery).page = params.get('page') === null ? 1 : parseInt(params.get('page')!);
     getUsers(paramsObject as IUserQuery);
-    console.log('hola desde users')
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
