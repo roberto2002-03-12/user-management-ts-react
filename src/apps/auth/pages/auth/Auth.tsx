@@ -1,22 +1,18 @@
 import { useSelector } from 'react-redux';
-import { Login, Recovery, ChangePassword } from '../components';
-import { SmallLoading }  from '../../../shared';
-import { IStoreRedux } from '../../../store'
-import '../styles/AuthStyle.css'
+import { Login, Recovery, ChangePassword, Register } from './components';
+import { SmallLoading } from '../../../../shared';
+import { IStoreRedux } from '../../../../store'
+import '../../styles/AuthStyle.css'
 
 export const Auth = () => {
   const { authState } = useSelector((state: IStoreRedux) => state.auth);
 
   return (
     <div className="auth-container">
-      <div className='auth-modal'>
+      <div className={authState !== 'register' ? `auth-modal` : `register-modal`}>
         {
           authState === 'checking' ? (
             <SmallLoading />
-          ) : authState === 'not-authenticated' ? (
-            <Login />
-          ) : authState === 'recovery' ? (
-            <Recovery />
           ) : authState === 'authenticated' ? (
             <div
               style={{
@@ -34,8 +30,16 @@ export const Auth = () => {
                 }}
               >Alredy logged</h2>
             </div>
-          ) : (
+          ) : authState === 'not-authenticated' ? (
+            <Login />
+          ) : authState === 'register' ? (
+            <Register  />
+          ) : authState === 'recovery' || authState === 'not-sent' ? (
+            <Recovery />
+          ) : authState === 'sent' ? (
             <ChangePassword />
+          ) : (
+            <></>
           )
         }
       </div>

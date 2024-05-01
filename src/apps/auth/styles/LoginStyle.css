@@ -21,19 +21,22 @@
 }
 
 .auth-inputs {
-
   text-align: center;
 }
 
 .auth-link {
   text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 2px;
-  width: 150px;
-  margin-left: 62px;
-  margin-right: 50%;
+  margin: auto;
   margin-bottom: 20px;
+  width: 225px;
 }
 
 .auth-recovery-link {
   font-size: 12px;
+  color: cornflowerblue;
+  cursor: pointer;
 }

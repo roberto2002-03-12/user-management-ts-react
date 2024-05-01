@@ -3,13 +3,14 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { 
-  onLogin, onCheckingAuth, onSubmitRecovery, onResetRecovery,
+  onLogin, onCheckingAuth, onSubmitRecovery, onStartLogin,
   onStartRecovery, onLogoutUser, onSetOptions, onSetUser,
-  onLoadProfile, onSetNewProfile, onSetLoadedProfile
+  onLoadProfile, onSetNewProfile, onSetLoadedProfile, onStartRegister
 } from '../../../store';
 import { 
   IUserLoginInputs, IUser, 
-  IRecoveryInputs, IRecoveryChangePasswordInputs, IUserProfileInputs, IUserChangePasswordInputs
+  IRecoveryInputs, IRecoveryChangePasswordInputs, IUserProfileInputs, IUserChangePasswordInputs,
+  IUserRegisterInputs
 } from '../model'
 import { ISideBarOptions } from '../../../models'
 import { AxiosError } from 'axios';
@@ -93,14 +94,39 @@ export const useAuthApi = () => {
     }
   }
 
-  const register = async (data: IUser) => {
+  const register = async (data: IUserRegisterInputs) => {
     dispatch(onCheckingAuth());
     try {
-      await userManagementApi.post('/register', data);
+      const newData = {
+        user: {
+          email: data.email,
+          password: data.password,
+        },
+        profile: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          birth: data.birth,
+          phoneNumber: data.phoneNumber
+        }
+      }
 
+      await userManagementApi.post('/auth/register', newData);
       
+      dispatch(onStartLogin())
+      Swal.fire({
+        icon: 'success',
+        title: 'Account created',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        text: 'You can now login to the platform'
+      })
     } catch (error) {
-
+      dispatch(onStartRegister())
+      Swal.fire({
+        icon: 'error',
+        title: 'Error on trying login',
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        text: `${(error as any).response?.data?.message ?? 'An error has occurred'}`
+      })
     }
   }
 
@@ -132,7 +158,7 @@ export const useAuthApi = () => {
     try {
       delete dataInputs.repeatPassword;
       const { data } = await userManagementApi.put('/auth/change-forgot-password', dataInputs);
-      dispatch(onResetRecovery()); // this set authState to "not-authenticated" which sends you back to login
+      dispatch(onStartLogin());
       Swal.fire({
         icon: 'success',
         title: 'Success on changing password',
@@ -283,6 +309,7 @@ export const useAuthApi = () => {
     sendRecovery,
     changePasswordRecovery,
     logout,
+    register,
     setUserAndOptions,
     updateProfile,
     changePassword

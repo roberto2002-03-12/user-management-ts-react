@@ -1,16 +1,16 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useAuthApi } from '../hook/useAuthApi';
-import { onResetRecovery } from '../../../store';
+import { onStartLogin } from '../../../../../store';
+import { useAuthApi } from '../../../hook/useAuthApi';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import '../styles/RecoveryStyle.css';
-import { IRecoveryInputs } from '../model/user.model';
+import '../../../styles/RecoveryStyle.css';
+import { IRecoveryInputs } from '../../../model';
 
 export const Recovery = () => {
-  const dispatch = useDispatch();
   const { sendRecovery } = useAuthApi();
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -31,6 +31,7 @@ export const Recovery = () => {
   return (
     <>
       <div
+        className='auth-recovery-back'
         style={{
           position: 'absolute',
           display: 'flex',
@@ -49,7 +50,7 @@ export const Recovery = () => {
             color: 'gray'
           }}
           variant='text'
-          onClick={() => dispatch(onResetRecovery())}
+          onClick={() => dispatch(onStartLogin())}
         >
           <ArrowBackIcon />
         </Button>

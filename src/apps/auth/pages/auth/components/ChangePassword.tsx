@@ -1,9 +1,9 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useAuthApi } from '../hook/useAuthApi'
+import { useAuthApi } from '../../../hook/useAuthApi'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
-import '../styles/ChangePasswordStyle.css';
-import { IRecoveryChangePasswordInputs } from '../model'
+import '../../../styles/ChangePasswordStyle.css';
+import { IRecoveryChangePasswordInputs } from '../../../model'
 
 export const ChangePassword = () => {
   const { changePasswordRecovery } = useAuthApi();

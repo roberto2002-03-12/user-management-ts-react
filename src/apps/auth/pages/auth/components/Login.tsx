@@ -1,12 +1,17 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { onStartRecovery } from '../../../store';
-import { useAuthApi } from '../hook/useAuthApi';
+import { onStartRecovery, onStartRegister } from '../../../../../store';
+import { useAuthApi } from '../../../hook/useAuthApi';
 import TextField from '@mui/material/TextField';
-import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import '../styles/LoginStyle.css';
-import { IUserLoginInputs } from '../model';
+import '../../../styles/LoginStyle.css';
+import { IUserLoginInputs } from '../../../model';
+
+const inputStyle = {
+  width: '225px',
+  marginTop: '5px',
+  marginBottom: '5px'
+}
 
 export const Login = () => {
   const { login } = useAuthApi();
@@ -54,9 +59,7 @@ export const Login = () => {
                 }
               )
             }
-            style={{
-              width: '225px',
-            }}
+            style={inputStyle}
           />
           <TextField
             error={ errors.password && isSubmitted }
@@ -74,18 +77,21 @@ export const Login = () => {
               })
             }
             type='password'
-            style={{
-              width: '225px',
-            }}
+            style={inputStyle}
           />
           <div className='auth-link'>
-            <Link 
-              to='#' 
+            <span
               className='auth-recovery-link'
               onClick={() => dispatch(onStartRecovery())}
             >
               Forgot password?
-            </Link>
+            </span>
+            <span
+              className='auth-recovery-link'
+              onClick={() => dispatch(onStartRegister())}
+            >
+              Sign up
+            </span>
           </div>
           <Button
             type='submit'

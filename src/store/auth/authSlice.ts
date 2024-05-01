@@ -8,37 +8,24 @@ export const authSlice = createSlice({
     authState: 'not-authenticated', // authenticated | checking | not-authenticated
     profileState: 'finished',
     user: {},
-    authMessage: '',
     options: [],
   },
   reducers: {
     onCheckingAuth: (state) => {
       state.authState = 'checking';
       state.user = {};
-      state.authMessage = '';
     },
     onLogin: (state, { payload }) => {
       state.authState = 'authenticated',
       state.user = payload
     },
-    onErrorAuth: (state, { payload }) => {
-      state.authMessage = 'not-authenticated',
-      state.user = {},
-      state.authMessage = payload
+    onErrorAuth: (state) => {
+      state.user = {};
     },
     onLogoutUser: (state) => {
       state.authState = 'not-authenticated';
       state.user = {};
-      state.authMessage = '';
       state.options = [];
-    },
-    onClearMessage: (state) => {
-      state.authMessage = ''
-    },
-    onRegister: (state, { payload }) => {
-      state.authState = 'not-authenticated';
-      state.user = {};
-      state.authMessage = payload;
     },
     onSetOptions: (state, { payload }) => {
       state.options = payload
@@ -47,22 +34,23 @@ export const authSlice = createSlice({
       state.authState = 'authenticated'
       state.user = payload;
     },
+    onStartLogin: (state) => {
+      state.authState = 'not-authenticated'
+    },
+    onStartRegister: (state) => {
+      state.authState = 'register';
+    },
     onStartRecovery: (state) => {
       state.authState = 'recovery';
-    },
-    onResetRecovery: (state) => {
-      state.authState = 'not-authenticated'
     },
     onSubmitRecovery: (state) => {
       state.authState = 'sent';
     },
     onCheckingRecovery: (state) => {
       state.authState = 'checking';
-      state.authMessage = '';
     },
-    onErrorRecovery: (state, { payload }) => {
+    onErrorRecovery: (state) => {
       state.authState = 'not-sent';
-      state.authMessage = payload;
     },
     onSetNewProfile: (state, { payload }) => {
       state.profileState = 'finished';
@@ -82,11 +70,10 @@ export const {
   onLogin,
   onErrorAuth,
   onLogoutUser,
-  onClearMessage,
-  onRegister,
   onSetOptions,
+  onStartLogin,
   onStartRecovery,
-  onResetRecovery,
+  onStartRegister,
   onSubmitRecovery,
   onCheckingRecovery,
   onErrorRecovery,

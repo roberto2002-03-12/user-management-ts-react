@@ -1,0 +1,16 @@
+.register-title {
+  text-align: center;
+  color: #3F53FE;
+  font-size: 28px;
+}
+
+.register-inputs {
+  text-align: center;
+}
+
+.register-link {
+  margin-top: 10px;
+  font-size: 12px;
+  color: cornflowerblue;
+  cursor: pointer;
+}
