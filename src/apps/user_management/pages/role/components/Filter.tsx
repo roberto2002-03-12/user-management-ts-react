@@ -20,6 +20,16 @@ const defaultValues: IRoleQuery = {
   roleName: ''
 };
 
+const inputStyle = {
+  width: '180px',
+  marginLeft: '15px',
+  marginRight: '15px' 
+}
+
+const buttonStyle = {
+  width: '150px'
+}
+
 export const Filter = ({
   setParams, 
   page
@@ -63,11 +73,7 @@ export const Filter = ({
               required: false,
             })
           }
-          sx={{ 
-            width: '180px',
-            marginLeft: '15px',
-            marginRight: '15px' 
-          }}
+          sx={inputStyle}
           InputLabelProps={{
             style: {
               fontSize: '12px'
@@ -80,11 +86,7 @@ export const Filter = ({
 
         <FormControl 
           variant='filled' 
-          sx={{ 
-            width: '180px',
-            marginLeft: '15px',
-            marginRight: '15px'  
-          }} 
+          sx={inputStyle} 
           size='small'
         >
           <InputLabel id="role-type" sx={{ fontSize: '12px' }}>Role state</InputLabel>
@@ -125,11 +127,7 @@ export const Filter = ({
                       }
                     }
                   }}
-                  sx={{
-                    width: '180px',
-                    marginLeft: '15px',
-                    marginRight: '15px'
-                  }}
+                  sx={inputStyle}
                   onChange={(date) => field.onChange(date)}
                   value={field.value ? new Date(field.value) : null} 
                 />
@@ -156,11 +154,7 @@ export const Filter = ({
                       }
                     }
                   }}
-                  sx={{
-                    width: '180px',
-                    marginLeft: '15px',
-                    marginRight: '15px'
-                  }}
+                  sx={inputStyle}
                   onChange={(date) => field.onChange(date)}
                   value={field.value ? new Date(field.value) : null} 
                 />
@@ -176,9 +170,7 @@ export const Filter = ({
           type='submit'
           variant='contained'
           size='small'
-          sx={{
-            width: '150px'
-          }}
+          sx={buttonStyle}
         >
           Apply filters
         </Button>
@@ -186,9 +178,7 @@ export const Filter = ({
           onClick={() => reset({ roleName: '', active: 'true', createdAtEnd: undefined, createdAtStart: undefined })}
           variant='contained'
           size='small'
-          sx={{
-            width: '150px'
-          }}
+          sx={buttonStyle}
         >
           Delete filters
         </Button>
