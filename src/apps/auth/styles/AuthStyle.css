@@ -24,3 +24,9 @@
   align-items: center;
   justify-content: center;
 }
+
+@media only screen and (max-width: 578px) {
+  .auth-modal {
+    width: 280px;
+  }
+}

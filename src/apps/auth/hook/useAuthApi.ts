@@ -93,6 +93,17 @@ export const useAuthApi = () => {
     }
   }
 
+  const register = async (data: IUser) => {
+    dispatch(onCheckingAuth());
+    try {
+      await userManagementApi.post('/register', data);
+
+      
+    } catch (error) {
+
+    }
+  }
+
   const sendRecovery = async (dataInputs: IRecoveryInputs) => {
     dispatch(onCheckingAuth());
     try {

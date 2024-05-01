@@ -42,6 +42,7 @@ export const EditUser = () => {
       }
     });
   }
+  
   const rolesFiltered = useMemo(() => {
     return rolesForSelect.filter(role => role.roleName.toLowerCase().includes(filter.toLowerCase()))
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -143,27 +144,27 @@ export const EditUser = () => {
                       loadingRolesState === 'loading' ?
                       <SmallLoading /> : (
                         <List>
-                        {
-                          (filter === '' ? rolesForSelect : rolesFiltered).map((row) => (
-                            <ListItem
-                              key={row.id}
-                              disablePadding
-                            >
-                              <ListItemButton>
-                                <ListItemIcon>
-                                  <Checkbox 
-                                    checked={ rolesSelected.some(r => r.id === row.id) }
-                                    edge='start'
-                                    inputProps={{ 'aria-labelledby': `checkbox-list-label-${row.id}` }}
-                                    onChange={ handleCheckBoxChange(row.id, row.roleName) }
-                                  />
-                                </ListItemIcon>
-                                <ListItemText id={`checkbox-list-label-${row.id}`} primary={ row.roleName } />
-                              </ListItemButton>
-                            </ListItem>
-                          ))
-                        }
-                      </List>
+                          {
+                            (filter === '' ? rolesForSelect : rolesFiltered).map((row) => (
+                              <ListItem
+                                key={row.id}
+                                disablePadding
+                              >
+                                <ListItemButton>
+                                  <ListItemIcon>
+                                    <Checkbox 
+                                      checked={ rolesSelected.some(r => r.id === row.id) }
+                                      edge='start'
+                                      inputProps={{ 'aria-labelledby': `checkbox-list-label-${row.id}` }}
+                                      onChange={ handleCheckBoxChange(row.id, row.roleName) }
+                                    />
+                                  </ListItemIcon>
+                                  <ListItemText id={`checkbox-list-label-${row.id}`} primary={ row.roleName } />
+                                </ListItemButton>
+                              </ListItem>
+                            ))
+                          }
+                        </List>
                       )
                     }
                   </div>

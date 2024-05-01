@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   padding-top: 100px;
+  overflow-x: hidden;
 }
 
 .um-title-filters {
@@ -41,10 +42,18 @@
 .um-table-box {
   margin-top: 50px;
   padding-top: 10px;
-  width: 1000px;
+
   border-radius: 20px;
   border: 1px solid rgba(0, 0, 0, 0.301);
   margin-bottom: 20px;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.um-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 .um-table th {
@@ -55,4 +64,45 @@
 
 .um-table td {
   text-align: center;
+}
+
+@media only screen and (max-width: 992px) and (min-width: 768px) {
+  /*Filtros*/
+  .um-filters {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 767px) and (min-width: 588px) {
+  /*Filtros*/
+  .um-filters {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 587px) {
+  /*Filtros*/
+  .um-filters {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .um-buttons {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 0;
+  }
+
+  .um-title-filters {
+    width: 90%;
+  } 
+
 }

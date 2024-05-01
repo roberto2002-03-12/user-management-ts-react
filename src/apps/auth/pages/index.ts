@@ -1,2 +1,2 @@
 export * from './Auth';
-export * from './UserProfile';
+export * from './user-profile/UserProfile';
